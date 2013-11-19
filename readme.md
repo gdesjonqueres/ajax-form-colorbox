@@ -4,4 +4,4 @@ To have a look:
 
 http://g.desjonqueres.free.fr/portf/aaa/
 
-click on the link "open colorbox"
+click on the link "open colorbox" to have access to the UI
