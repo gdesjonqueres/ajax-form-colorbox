@@ -41,13 +41,13 @@ function displayDate(array $date)
 {
 	$html = '';
 	if (!empty($date['min']) && !empty($date['max'])) {
-		$html = ' entre ' . _balise($date['min'], 'strong') . ' et ' . _balise($date['max'], 'strong');
+		$html = ' between ' . _balise($date['min'], 'strong') . ' and ' . _balise($date['max'], 'strong');
 	}
 	else if (!empty($date['min'])) {
-		$html = _balise(' après ' . $date['min'], 'strong');
+		$html = _balise(' after ' . $date['min'], 'strong');
 	}
 	else if (!empty($date['max'])) {
-		$html = _balise(' avant ' . $date['max'], 'strong');
+		$html = _balise(' before ' . $date['max'], 'strong');
 	}
 	return $html;
 }
@@ -56,7 +56,7 @@ function displayPrix(array $prix)
 {
 	$html = '';
 	if (!empty($prix['min']) && !empty($prix['max'])) {
-		$html = ' entre ' . _balise(number_format($prix['min'], 0, ',', ' '), 'strong') . ' et ' . _balise(number_format($prix['max'], 0, ',', ' '), 'strong') . ' €';
+		$html = ' between ' . _balise(number_format($prix['min'], 0, ',', ' '), 'strong') . ' and ' . _balise(number_format($prix['max'], 0, ',', ' '), 'strong') . ' €';
 	}
 	else if (!empty($prix['min'])) {
 		$html = ' >= ' .  _balise(number_format($prix['min'], 0, ',', ' '), 'strong') . ' €';
@@ -84,27 +84,27 @@ function criteriaToText($tabCriteria)
 
 	if (!empty($tabCriteria['marque'])) {
 		if (!empty($tabCriteria['modele'])) {
-			$html .= comma('modèles', !empty($html)) . _balise(ucfirst(strtolower($tabCriteria['marque']['label'])) . ' ' . _balise(strtoupper($tabCriteria['modele']['label']), 'em'), 'strong');
+			$html .= comma('models', !empty($html)) . _balise(ucfirst(strtolower($tabCriteria['marque']['label'])) . ' ' . _balise(strtoupper($tabCriteria['modele']['label']), 'em'), 'strong');
 		}
 		else {
-			$html .= comma('marque', !empty($html)) . _balise(ucfirst(strtolower($tabCriteria['marque']['label'])), 'strong');
+			$html .= comma('brand', !empty($html)) . _balise(ucfirst(strtolower($tabCriteria['marque']['label'])), 'strong');
 		}
 
 	}
 	else if (!empty($tabCriteria['modele'])) {
-		$html .= comma('modèle', !empty($html)) . _balise(strtoupper($tabCriteria['modele']['label']), 'strong');
+		$html .= comma('model', !empty($html)) . _balise(strtoupper($tabCriteria['modele']['label']), 'strong');
 	}
 
 	if (!empty($tabCriteria['segment'])) {
-		$html .= comma('gamme', !empty($html)) . _balise(strtolower($tabCriteria['segment']['label']), 'strong');
+		$html .= comma('range', !empty($html)) . _balise(strtolower($tabCriteria['segment']['label']), 'strong');
 	}
 
 	if (!empty($tabCriteria['energie'])) {
 		if (!empty($html)) {
-			$html .= ', énergie ';
+			$html .= ', fuel type ';
 		}
 		else {
-			$html .= 'Véhicules ';
+			$html .= 'Vehicules ';
 		}
 		$html .= _balise(strtolower($tabCriteria['energie']['label']), 'strong');
 	}
@@ -114,55 +114,55 @@ function criteriaToText($tabCriteria)
 			$html .= ', ';
 		}
 		else {
-			$html .= 'Véhicules ';
+			$html .= 'Vehicules ';
 		}
 		if (strtolower($tabCriteria['etat']['value']) == 'vn') {
-			$html .= ' ' . _balise('neuf', 'strong');
+			$html .= ' ' . _balise('new', 'strong');
 		}
 		else if (strtolower($tabCriteria['etat']['value']) == 'vo') {
-			$html .= ' d\'' . _balise('occasion', 'strong');
+			$html .= ' d\'' . _balise('used', 'strong');
 		}
 		else if (strtolower($tabCriteria['etat']['value']) == 'va') {
-			$html .= ' ' . _balise('assimilé neuf', 'strong');
+			$html .= ' ' . _balise('as neuf', 'strong');
 		}
 	}
 
 	if (!empty($tabCriteria['mec'])) {
 		if (!empty($html)) {
-			$html .= ', ' . _balise('première immat', 'em');
+			$html .= ', ' . _balise('first registration', 'em');
 		}
 		else {
-			$html .= 'Véhicules dont la ' . _balise('première immatriculation', 'em') . ' est';
+			$html .= 'Vehicules ' . _balise('first registered', 'em') . '';
 		}
 		$html .= displayDate($tabCriteria['mec']);
 	}
 
 	if (!empty($tabCriteria['ddi'])) {
 		if (!empty($html)) {
-			$html .= ', ' . _balise('dernière immat', 'em');
+			$html .= ', ' . _balise('last registration', 'em');
 		}
 		else {
-			$html .= 'Véhicules dont la ' . _balise('dernière immatriculation', 'em') . ' est';
+			$html .= 'Vehicules ' . _balise('lastly registered', 'em') . '';
 		}
 		$html .= displayDate($tabCriteria['ddi']);
 	}
 
 	if (!empty($tabCriteria['pac'])) {
 		if (!empty($html)) {
-			$html .= ', ' . _balise('prix à l\'achat', 'em');
+			$html .= ', ' . _balise('purchase price', 'em');
 		}
 		else {
-			$html .= 'Véhicules dont le ' . _balise('prix d\'achat', 'em') . ' est';
+			$html .= 'Vehicules with ' . _balise('purchase price', 'em') . '';
 		}
 		$html .= displayPrix($tabCriteria['pac']);
 	}
 
 	if (!empty($tabCriteria['parg'])) {
 		if (!empty($html)) {
-			$html .= ', ' . _balise('prix argus', 'em');
+			$html .= ', ' . _balise('market price', 'em');
 		}
 		else {
-			$html .= 'Véhicules dont le ' . _balise('prix argus', 'em') . ' est';
+			$html .= 'Vehicules with ' . _balise('market price', 'em') . '';
 		}
 		$html .= displayPrix($tabCriteria['parg']);
 	}

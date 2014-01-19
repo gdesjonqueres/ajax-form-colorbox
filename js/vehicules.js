@@ -17,8 +17,8 @@ if (typeof Dtno === 'undefined') {
 			$("#btn-reset-form").click(function() {vehic.resetForm();});
 			$('#btn-show-options').click(function() {vehic.toggleMoreOptions();});
 			
-			$("#marque").chosen({no_results_text: "Aucun résultat pour"}).change(function() {vehic.filterModels();});
-			$("#modele").chosen({no_results_text: "Aucun résultat pour"});
+			$("#marque").chosen({no_results_text: "No result for "}).change(function() {vehic.filterModels();});
+			$("#modele").chosen({no_results_text: "No result for"});
 			
 			$("#pac-min").change(vehic.changeMinPrice);
 			$("#parg-min").change(vehic.changeMinPrice);
@@ -259,9 +259,8 @@ if (typeof Dtno === 'undefined') {
 					},
 					null,
 					function() {
-						alert("une erreur s'est produite");
-					}
-				);
+						alert("An unknown error was raised");
+					})
 			}
 		},
 
@@ -291,13 +290,13 @@ if (typeof Dtno === 'undefined') {
 				$btn,
 				$list = $("#vehic-" + listName);
 
-			$elt = $('<li title="Faites un double clic pour recopier ces critères dans la liste des filtres"/>')
+			$elt = $('<li title="Double click on the line to copy the criteria in the filter list"/>')
 				.attr("id", "vehic-" + listName + "-" + d.id)
 				.html("<span>" + d.label + "</span>")
 				.data("criteria", d.criteria)
 				.dblclick(vehic.callbackDuplicate);
 
-			$btn = $('<button type="button" title="supprimer" class="btn btn-reset pull-right delete"/>')
+			$btn = $('<button type="button" title="delete" class="btn btn-reset pull-right delete"/>')
 				.click(function() {
 					vehic.remove(listName, d.id);
 				})
@@ -437,7 +436,7 @@ if (typeof Dtno === 'undefined') {
 				},
 				null,
 				function() {
-					alert("une erreur s'est produite");
+					alert("An unknown error was raised");
 				}
 			);
 		},
@@ -456,7 +455,7 @@ if (typeof Dtno === 'undefined') {
 				},
 				null,
 				function() {
-					alert("une erreur s'est produite");
+					alert("An unknown error was raised");
 				}
 			);
 		},

@@ -19,7 +19,7 @@ if (typeof Dtno === 'undefined') {
 				text = xhr.responseText;
 			}
 			else {
-				text += '\nréponse : ' + xhr.responseText;
+				text += '\nresponse : ' + xhr.responseText;
 			}
 			
 			if (window.console && window.console.log && window.console.error && window.console.info) {

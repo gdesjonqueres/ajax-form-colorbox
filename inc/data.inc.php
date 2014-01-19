@@ -26,19 +26,28 @@
 );*/
 
 $tabGenre = array(
-'VP' =>	'Véhicule particulier',
-'VU' =>	'Utilitaire',
-'50cc' =>	'Deux roues - 50cc',
+'VP' =>	'Private vehicule',
+'VU' =>	'Commercial vehicule',
+/*'50cc' =>	'Deux roues - 50cc',
 'MOTO' =>	'Deux roues - 250cc et +',
 '125cc' =>	'Deux roues - 125cc',
 'QUADS' =>	'Quads',
-'TM' =>	'Trois roues',
-'AUTRES' =>	'Autres',
+'TM' =>	'Trois roues',*/
+'MOTO' => 'Motorbike',
+'AUTRES' =>	'Other',
 );
 
-$tabEtat = array('vn' => 'VN', 'vo' => 'VO', 'va' => 'VA');
+$tabEtat = array('vn' => 'New', 'vo' => 'Used', 'va' => 'As new');
 
 $tabSegment = array(
+'ECO',
+'INFERIOR',
+'MEDIUM',
+'SUPERIOR',
+'LUXURY'
+);
+
+/*$tabSegment = array(
 'ECONOMIQUE',
 'INFERIEURE',
 'MOY-INFER',
@@ -47,7 +56,7 @@ $tabSegment = array(
 'LUXE',
 'AUTRES',
 'INCONNUE',
-);
+);*/
 
 /*$tabEnergie = array(
 'AIR COMPRIM'    => 'air comprimé',
@@ -82,10 +91,10 @@ $tabSegment = array(
 );*/
 
 $tabEnergie = array(
-	'ESSENCE' => 'Essence',
-	'GASOIL'  => 'Gasoil',
-	'ELECTRIQUE' => 'Electrique',
-	'HYBRIDE' => 'Hybride',
+	'ESSENCE' => 'Diesel',
+	'GASOIL'  => 'Gasoline',
+	'ELECTRIQUE' => 'Electric',
+	'HYBRIDE' => 'Gasoline - Hybrid',
 );
 
 //$tabMarque = getListMarque();
@@ -152,6 +161,9 @@ $tabMarque = array(
 'AQUILA' => 'AQUILA',
 'ARCTIC CAT' => 'ARCTIC CAT',
 'ARCUEILMOT' => 'ARCUEILMOT',
+'RENAULT' => 'RENAULT',
+'CITROEN' => 'Citroën',
+'FERRARI' => 'FERRARI',
 );
 
 //$tabModele = getListModele();
@@ -291,7 +303,15 @@ $tabModele = array(
 		'ASTRO',
 		'ASX',
 		'AS51',
-		'AT',)
+		'AT',),
+	'RENAULT' => array(
+		'R5',
+		'R21',),
+	'CITROEN' => array(
+		'DS'),
+	'FERRARI' => array(
+		'F40',
+		'ENZO'),
 );
 
 /*$tabCarrosserie = array(
@@ -326,7 +346,7 @@ $tabModele = array(
 'CUSTOM CHOP',
 'QUADS',
 );*/
-$tabCarrosserie = array(
+/*$tabCarrosserie = array(
 'BER' =>	'Berline',
 'MONO' =>	'Monospace',
 'BREAK' =>	'Break',
@@ -345,6 +365,16 @@ $tabCarrosserie = array(
 'MOTO_CUST' =>	'Moto custom',
 'MOB' =>	'Mobylettes',
 'CAMION' =>	'Camion',
+);*/
+$tabCarrosserie = array(
+'BER' =>	'Sedan',
+'BREAK' =>	'Convertible',
+'TS_TERR' =>	'SUV',
+'COUPE' =>	'Coupe',
+'CABRIOLET' =>	'Hatchback',
+'CAMPINGCAR' =>	'Wagon',
+'MINIBUS' =>	'Minivan',
+'CAMION' =>	'Truck',
 );
 
 $tabPrix = array(
@@ -424,32 +454,32 @@ $tabVehicules =& $_SESSION['_vehicules'];
 if (!isset($tabVehicules['inclus'])) {
 	$tabVehicules['inclus'] = array();
 
-	$criteria = array(	'marque' => array('value' => 'renault', 'label' => 'Renault'),
-						'modele' => array('value' => 'r5', 'label' => 'r5'),
+	$criteria = array(	'marque' => array('value' => 'RENAULT', 'label' => 'Renault'),
+						'modele' => array('value' => 'R5', 'label' => 'r5'),
 						'mec' => array('min' => '01/1991'));
 	$tabVehicules['inclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
-	$criteria = array(	'genre' => array('value' => 'VP', 'label' => 'Véhicule particulier'),
-						'marque' => array('value' => 'renault', 'label' => 'Renault'),
-						'modele' => array('value' => 'r21', 'label' => 'R 21'),
+	$criteria = array(	'genre' => array('value' => 'VP', 'label' => 'Private vehicule'),
+						'marque' => array('value' => 'RENAULT', 'label' => 'Renault'),
+						'modele' => array('value' => 'R21', 'label' => 'R 21'),
 						'mec' => array('min' => '01/1991', 'max' => '05/1995'));
 	$tabVehicules['inclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
-	$criteria = array(	'marque' => array('value' => 'citroen', 'label' => 'Citroën'),
+	$criteria = array(	'marque' => array('value' => 'CITROEN', 'label' => 'Citroën'),
 						'modele' => array('value' => 'ds', 'label' => 'DS'),
 						'ddi' => array('min' => '05/2011'),
-						'parg' => array('min' => '8000'));
+						'parg' => array('min' => '7500'));
 	$tabVehicules['inclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
-	$criteria = array(	'marque' => array('value' => 'ferrari', 'label' => 'Ferrari'),
+	$criteria = array(	'marque' => array('value' => 'FERRARI', 'label' => 'Ferrari'),
 						'ddi' => array('min' => '01/2009', 'max' => '12/2012'),
-						'parg' => array('min' => '20000', 'max' => '120000'));
+						'parg' => array('min' => '21000', 'max' => '96000'));
 	$tabVehicules['inclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
-	$criteria = array(	'genre' => array('value' => 'MOTO', 'label' => 'Deux roues - 250cc et +'),
-						'carrosserie' => array('value' => 'MOTO_CUST', 'label' => 'Moto custom'),
-						'etat' => array('value' => 'VA', 'label' => 'Véhicule assimilé neuf'));
-	$tabVehicules['inclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
+	// $criteria = array(	'genre' => array('value' => 'MOTO', 'label' => 'Deux roues - 250cc et +'),
+	// 					'carrosserie' => array('value' => 'MOTO_CUST', 'label' => 'Moto custom'),
+	// 					'etat' => array('value' => 'VA', 'label' => 'Véhicule assimilé neuf'));
+	// $tabVehicules['inclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
 	/*$tabVehicules['inclus'] = array(
 		array(
@@ -484,18 +514,18 @@ if (!isset($tabVehicules['inclus'])) {
 if (!isset($tabVehicules['exclus'])) {
 	$tabVehicules['exclus'] = array();
 
-	$criteria = array(	'marque' => array('value' => 'renault', 'label' => 'Renault'),
-						'modele' => array('value' => 'r32', 'label' => 'r32'),
-						'mec' => array('max' => '01/1995'));
-	$tabVehicules['exclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
+	// $criteria = array(	'marque' => array('value' => 'renault', 'label' => 'Renault'),
+	// 					'modele' => array('value' => 'r32', 'label' => 'r32'),
+	// 					'mec' => array('max' => '01/1995'));
+	// $tabVehicules['exclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
-	$criteria = array(	'energie' => array('value' => 'diesel', 'label' => 'Diesel'),
-						'mec' => array('max' => '01/1999'));
-	$tabVehicules['exclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
+	// $criteria = array(	'energie' => array('value' => 'diesel', 'label' => 'Diesel'),
+	// 					'mec' => array('max' => '01/1999'));
+	// $tabVehicules['exclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
-	$criteria = array(	'genre' => array('value' => 'CAMION', 'label' => 'Camion'),
-						'segment' => array('value' => 'INFERIEURE', 'label' => 'Inférieur'),);
-	$tabVehicules['exclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
+	// $criteria = array(	'genre' => array('value' => 'CAMION', 'label' => 'Camion'),
+	// 					'segment' => array('value' => 'INFERIEURE', 'label' => 'Inférieur'),);
+	// $tabVehicules['exclus'][] = array('criteria' => $criteria, 'hash' => getHashCriteria($criteria));
 
 	/*$tabVehicules['exclus'] = array(
 		array(
